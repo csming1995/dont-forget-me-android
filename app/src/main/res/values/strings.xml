@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">不忘</string>
+    <string name="app_slogan">不想忘记的美好，一个都不忘。</string>
+
+    <string name="login_page_login">登录</string>
+    <string name="login_page_register">注册</string>
+
+    <string name="login_page_user_name">用户名</string>
+    <string name="login_page_passwd">密码</string>
+    <string name="register_page_tel">手机号</string>
+    <string name="register_verification_code">验证码</string>
+    <string name="register_get_verification_code">获取验证码</string>
 </resources>

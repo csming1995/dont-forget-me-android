@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.csming.dontforgetme">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -10,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MainActivity"></activity>
         <activity android:name=".LaucherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginActivity"></activity>
+        <activity android:name=".login.activity.LoginActivity"
+            android:theme="@style/AppThemeNoActionBar">
+        </activity>
+        <activity android:name=".login.activity.RegisterActivity"
+            android:theme="@style/AppThemeNoActionBar">
+        </activity>
+        <activity android:name=".main.MainActivity">
+        </activity>
     </application>
 
 </manifest>

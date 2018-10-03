@@ -17,6 +17,10 @@ package com.csming.dontforgetme.di
 
 import com.csming.dontforgetme.LaucherActivity
 import com.csming.dontforgetme.common.di.ActivityScoped
+import com.csming.dontforgetme.login.activity.LoginActivity
+import com.csming.dontforgetme.login.LoginModule
+import com.csming.dontforgetme.login.RegisterModule
+import com.csming.dontforgetme.login.activity.RegisterActivity
 import com.csming.dontforgetme.main.MainActivity
 import com.csming.dontforgetme.main.MainModule
 import dagger.Module
@@ -28,6 +32,14 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector()
     internal abstract fun launcherActivity(): LaucherActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [LoginModule::class])
+    internal abstract fun loginActivity(): LoginActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [RegisterModule::class])
+    internal abstract fun registerActivity(): RegisterActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = [MainModule::class])
