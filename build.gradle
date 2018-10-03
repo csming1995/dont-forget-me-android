@@ -22,6 +22,29 @@ allprojects {
     }
 }
 
+ext {
+    // App version
+    versionName = '0.1.0' // X.Y.Z; X = Major, Y = minor, Z = Patch level
+    versionCode = 01000 // XYZZM; M = Module (tv, mobile)
+
+    // SDK and tools
+    compileSdkVersion = 28
+    minSdkVersion = 19
+    targetSdkVersion = 28
+
+    // App dependencies
+    appcompatVersion = '1.0.0-beta01'
+    constraintLayoutVersion = '1.1.2'
+    materialVersion = '1.0.0-beta01'
+
+    lifecycleVersion = '2.0.0-beta01'
+
+    dagger = "2.16"
+
+    timberVersion = "4.7.0"
+
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

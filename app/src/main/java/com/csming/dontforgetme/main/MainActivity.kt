@@ -1,9 +1,10 @@
-package com.csming.dontforgetme
+package com.csming.dontforgetme.main
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.csming.dontforgetme.R
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
