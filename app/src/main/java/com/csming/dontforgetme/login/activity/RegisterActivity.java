@@ -1,5 +1,7 @@
 package com.csming.dontforgetme.login.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,9 +12,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.csming.dontforgetme.Contacts;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.LoadingFragment;
-import com.csming.dontforgetme.common.model.ApiResultModel;
 import com.csming.dontforgetme.common.model.ApiResultModelKt;
 import com.csming.dontforgetme.common.model.RegisterResultModel;
 import com.csming.dontforgetme.login.viewmodel.RegisterViewModel;
@@ -20,18 +22,22 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import javax.inject.Inject;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.DaggerAppCompatActivity;
-import timber.log.Timber;
 
 public class RegisterActivity extends DaggerAppCompatActivity {
+
+    public static final String RESULT_KEY_USER_ID = "user_id";
+    public static final String RESULT_KEY_PASSWD = "passwd";
 
     private TextInputLayout mTilPhone;
     private EditText etPhone;
     private EditText etPassword;
     private EditText etVertifyCode;
+
+    private String mUserId;
+    private String mPasswd;
 
     private FrameLayout mFlRegister;
 
@@ -76,6 +82,8 @@ public class RegisterActivity extends DaggerAppCompatActivity {
                 RegisterResultModel registerResultModel = apiResultModel.getData();
                 if ("success" .equals(registerResultModel.getResult())) {
                     Toast.makeText(this, "恭喜你，成为了「不忘」的一员", Toast.LENGTH_SHORT).show();
+                    setResult();
+                    finish();
                 } else {
                     Toast.makeText(this, registerResultModel.getError_body(), Toast.LENGTH_SHORT).show();
                 }
@@ -103,7 +111,8 @@ public class RegisterActivity extends DaggerAppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!registerViewModel.isPhoneNumLegal(etPhone.getText().toString())) {
+                mUserId = s.toString();
+                if (!registerViewModel.isPhoneNumLegal(mUserId)) {
                     mTilPhone.setError(getText(R.string.register_phone_error));
                 } else {
                     mTilPhone.setErrorEnabled(false);
@@ -112,10 +121,32 @@ public class RegisterActivity extends DaggerAppCompatActivity {
             }
         });
 
-        mFlRegister.setOnClickListener( v -> {
-            if (mIsInputLegal) {
-                registerViewModel.register(etPhone.getText().toString(), etPassword.getText().toString());
+        etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mPasswd = s.toString();
             }
         });
+
+        mFlRegister.setOnClickListener( v -> {
+            if (mIsInputLegal) {
+                registerViewModel.register(mUserId, mPasswd);
+            }
+        });
+    }
+
+    private void setResult() {
+        Intent intent = new Intent();
+        intent.putExtra(RESULT_KEY_USER_ID, mUserId);
+        intent.putExtra(RESULT_KEY_PASSWD, mPasswd);
+        setResult(Activity.RESULT_OK, intent);
     }
 }

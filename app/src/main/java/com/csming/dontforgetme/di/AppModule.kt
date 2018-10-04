@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager
 import com.csming.dontforgetme.MainApplication
 import com.csming.dontforgetme.common.config.ApiConfig
 import com.csming.dontforgetme.common.config.BASE_URL
+import com.csming.dontforgetme.login.api.LoginApi
 import com.csming.dontforgetme.login.api.RegisterApi
 import dagger.Module
 import dagger.Provides
@@ -43,5 +44,10 @@ class AppModule {
     @Provides
     fun providerRegisterApi(retrofit: Retrofit): RegisterApi {
         return retrofit.create(RegisterApi::class.java)
+    }
+
+    @Provides
+    fun providerLoginApi(retrofit: Retrofit): LoginApi {
+        return retrofit.create(LoginApi::class.java)
     }
 }
