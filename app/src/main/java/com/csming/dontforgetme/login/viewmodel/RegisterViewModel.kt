@@ -19,7 +19,7 @@ import javax.inject.Inject
  */
 class RegisterViewModel @Inject constructor(private val registerRepository: RegisterRepository) : ViewModel() {
 
-    private val isLoading = MutableLiveData<Boolean>()
+    val isLoading = MutableLiveData<Boolean>()
 
     private val _registerResultLiveData = MutableLiveData<ApiResultModel<RegisterResultModel?>>()
     val registerResultLiveData: LiveData<ApiResultModel<RegisterResultModel?>>
@@ -37,7 +37,7 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
     fun register(phoneNum: String, password: String) {
 
         rx.Observable.create<RegisterResultModel> {
-//            isLoading.value = true
+            isLoading.postValue(true)
             var result: RegisterResultModel? = null
             try {
                 result = registerRepository.register(phoneNum, password)
@@ -52,10 +52,10 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<RegisterResultModel> {
                     override fun onCompleted() {
-//                        isLoading.value = false
+                        isLoading.postValue(false)
                     }
                     override fun onError(e: Throwable) {
-//                        isLoading.value = false
+                        isLoading.postValue(false)
                         Timber.e(e)
                         _registerResultLiveData.value = ApiResultModel(
                                 state = NET_ERROR

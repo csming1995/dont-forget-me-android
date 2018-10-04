@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.csming.dontforgetme.R;
+import com.csming.dontforgetme.common.LoadingFragment;
 import com.csming.dontforgetme.common.model.ApiResultModel;
 import com.csming.dontforgetme.common.model.ApiResultModelKt;
 import com.csming.dontforgetme.common.model.RegisterResultModel;
@@ -33,6 +34,8 @@ public class RegisterActivity extends DaggerAppCompatActivity {
     private EditText etVertifyCode;
 
     private FrameLayout mFlRegister;
+
+    private boolean mIsInputLegal = false;
 
     @Inject
     ViewModelProvider.Factory factory;
@@ -58,6 +61,13 @@ public class RegisterActivity extends DaggerAppCompatActivity {
     private void initData() {
         registerViewModel = ViewModelProviders.of(this, factory).get(RegisterViewModel.class);
 
+        registerViewModel.isLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                LoadingFragment.show(getFragmentManager());
+            } else {
+                LoadingFragment.hidden();
+            }
+        });
 
         registerViewModel.getRegisterResultLiveData().observe(this, apiResultModel -> {
             if (apiResultModel.getState() == ApiResultModelKt.NET_ERROR){
@@ -97,12 +107,15 @@ public class RegisterActivity extends DaggerAppCompatActivity {
                     mTilPhone.setError(getText(R.string.register_phone_error));
                 } else {
                     mTilPhone.setErrorEnabled(false);
+                    mIsInputLegal = true;
                 }
             }
         });
 
-        mFlRegister.setOnClickListener(v->{
-            registerViewModel.register(etPhone.getText().toString(), etPassword.getText().toString());
+        mFlRegister.setOnClickListener( v -> {
+            if (mIsInputLegal) {
+                registerViewModel.register(etPhone.getText().toString(), etPassword.getText().toString());
+            }
         });
     }
 }
