@@ -4,10 +4,10 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.net.wifi.WifiManager
 import com.csming.dontforgetme.MainApplication
-import com.csming.dontforgetme.common.config.ApiConfig
 import com.csming.dontforgetme.common.config.BASE_URL
-import com.csming.dontforgetme.login.api.LoginApi
-import com.csming.dontforgetme.login.api.RegisterApi
+import com.csming.dontforgetme.api.BookApi
+import com.csming.dontforgetme.api.LoginApi
+import com.csming.dontforgetme.api.RegisterApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -49,5 +49,10 @@ class AppModule {
     @Provides
     fun providerLoginApi(retrofit: Retrofit): LoginApi {
         return retrofit.create(LoginApi::class.java)
+    }
+
+    @Provides
+    fun providerBookApi(retrofit: Retrofit): BookApi {
+        return retrofit.create(BookApi::class.java)
     }
 }

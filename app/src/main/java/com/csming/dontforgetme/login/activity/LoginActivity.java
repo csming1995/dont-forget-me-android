@@ -40,8 +40,8 @@ public class LoginActivity extends DaggerAppCompatActivity {
     private EditText etUserId;
     private EditText etPassword;
 
-    private String mUserId;
-    private String mPasswd;
+    private String mUserId = "";
+    private String mPasswd = "";
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;

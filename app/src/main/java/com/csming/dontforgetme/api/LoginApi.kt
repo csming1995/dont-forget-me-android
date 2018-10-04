@@ -1,4 +1,4 @@
-package com.csming.dontforgetme.login.api
+package com.csming.dontforgetme.api
 
 import com.csming.dontforgetme.common.config.BASE_PATH
 import com.csming.dontforgetme.common.model.LoginResultModel

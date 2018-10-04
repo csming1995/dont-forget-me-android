@@ -1,7 +1,7 @@
 package com.csming.dontforgetme.login.repository.impl
 
 import com.csming.dontforgetme.common.model.LoginResultModel
-import com.csming.dontforgetme.login.api.LoginApi
+import com.csming.dontforgetme.api.LoginApi
 import com.csming.dontforgetme.login.repository.LoginRepository
 import javax.inject.Inject
 

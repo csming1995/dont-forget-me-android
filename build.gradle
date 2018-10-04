@@ -46,6 +46,8 @@ ext {
     retrofitVersion = "2.4.0"
     okhttpVersion = "3.10.0"
 
+    glideVersion = "4.6.1"
+
     gsonVersion = "2.8.5"
 
 }

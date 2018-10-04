@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.csming.dontforgetme">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MainApplication"
@@ -19,14 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.activity.LoginActivity"
-            android:theme="@style/AppThemeNoActionBar">
-        </activity>
-        <activity android:name=".login.activity.RegisterActivity"
-            android:theme="@style/AppThemeNoActionBar">
-        </activity>
-        <activity android:name=".main.MainActivity">
-        </activity>
+        <activity
+            android:name=".login.activity.LoginActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity
+            android:name=".login.activity.RegisterActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity
+            android:name=".main.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

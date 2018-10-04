@@ -36,8 +36,8 @@ public class RegisterActivity extends DaggerAppCompatActivity {
     private EditText etPassword;
     private EditText etVertifyCode;
 
-    private String mUserId;
-    private String mPasswd;
+    private String mUserId = "";
+    private String mPasswd = "";
 
     private FrameLayout mFlRegister;
 
