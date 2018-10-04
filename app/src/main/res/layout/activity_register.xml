@@ -45,7 +45,7 @@
         android:orientation="horizontal" />
 
     <LinearLayout
-        android:id="@+id/login_form"
+        android:id="@+id/register_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -54,53 +54,13 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:backgroundTint="@color/color_424242"
-            android:textColorHint="@color/color_424242">
-
-            <AutoCompleteTextView
-                android:id="@+id/et_user_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/color_424242"
-                android:hint="@string/login_page_user_name"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/color_black"
-                android:textColorHint="@color/color_424242" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:backgroundTint="@color/color_424242"
-            android:textColorHint="@color/color_424242">
-
-            <EditText
-                android:id="@+id/et_passwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/color_424242"
-                android:hint="@string/login_page_passwd"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/color_black"
-                android:textColorHint="@color/color_424242" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:orientation="horizontal">
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_phone"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -108,11 +68,11 @@
                 android:textColorHint="@color/color_424242">
 
                 <EditText
-                    android:id="@+id/et_tel"
+                    android:id="@+id/et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/color_424242"
-                    android:hint="@string/register_page_tel"
+                    android:hint="@string/register_page_phone"
                     android:imeActionLabel="@string/login_page_register"
                     android:imeOptions="actionUnspecified"
                     android:maxLines="1"
@@ -132,6 +92,7 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_verification_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -146,6 +107,28 @@
                 android:hint="@string/register_verification_code"
                 android:imeActionLabel="@string/login_page_register"
                 android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/color_black"
+                android:textColorHint="@color/color_424242" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_passwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:backgroundTint="@color/color_424242"
+            android:textColorHint="@color/color_424242">
+
+            <EditText
+                android:id="@+id/et_passwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/color_424242"
+                android:hint="@string/login_page_passwd"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@color/color_black"

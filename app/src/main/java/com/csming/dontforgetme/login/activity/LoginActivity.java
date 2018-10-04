@@ -1,5 +1,7 @@
 package com.csming.dontforgetme.login.activity;
 
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.DaggerAppCompatActivity;
 import timber.log.Timber;
 
@@ -11,11 +13,19 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.csming.dontforgetme.R;
+import com.csming.dontforgetme.login.viewmodel.LoginViewModel;
+
+import javax.inject.Inject;
 
 public class LoginActivity extends DaggerAppCompatActivity {
 
     private FrameLayout mFlLogin;
     private FrameLayout mFlRegister;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +38,20 @@ public class LoginActivity extends DaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        initData();
         initView();
+    }
+
+    private void initData() {
+        loginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel.class);
     }
 
     private void initView() {
         mFlLogin = findViewById(R.id.fl_login);
         mFlRegister = findViewById(R.id.fl_register);
 
-        mFlLogin.setOnClickListener(v -> Timber.d("jjjjjj"));
+        mFlLogin.setOnClickListener(v -> {
+        });
 
         mFlRegister.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));

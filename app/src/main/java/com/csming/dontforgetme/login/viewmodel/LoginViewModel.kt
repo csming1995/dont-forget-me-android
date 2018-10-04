@@ -1,6 +1,7 @@
 package com.csming.dontforgetme.login.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.csming.dontforgetme.login.repository.RegisterRepository
 import javax.inject.Inject
 
 /**
