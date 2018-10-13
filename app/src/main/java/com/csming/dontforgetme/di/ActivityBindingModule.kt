@@ -16,6 +16,8 @@
 package com.csming.dontforgetme.di
 
 import com.csming.dontforgetme.LaucherActivity
+import com.csming.dontforgetme.book.AddBookActivity
+import com.csming.dontforgetme.book.BookModule
 import com.csming.dontforgetme.common.di.ActivityScoped
 import com.csming.dontforgetme.login.activity.LoginActivity
 import com.csming.dontforgetme.login.LoginModule
@@ -44,4 +46,8 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = [MainModule::class])
     internal abstract fun mainActivity(): MainActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [BookModule::class])
+    internal abstract fun addBookActivity(): AddBookActivity
 }

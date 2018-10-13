@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,8 +32,27 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private List<BookModel> books;
 
+    private OnItemClickListener onItemClickListener;
+    private OnAddClickListener onAddClickListener;
+
     public BooksListAdapter() {
         super();
+    }
+
+    public interface OnItemClickListener {
+        void onClick(View view, int position);
+    }
+
+    public interface OnAddClickListener {
+        void onClick(View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void setOnAddClickListener(OnAddClickListener onAddClickListener) {
+        this.onAddClickListener = onAddClickListener;
     }
 
     public void setData(List<BookModel> books) {
@@ -58,8 +78,7 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (getItemViewType(position) == ITEM_TYPE_NORMAL) {
             BookModel book = books.get(position);
             if (book != null) {
@@ -71,9 +90,18 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         .apply(options)
                         .into(((BooksNormalViewHolder) holder).mIvCover);
                 ((BooksNormalViewHolder) holder).mTvTitle.setText(book.getBookName());
+                holder.itemView.setOnClickListener(v ->{
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onClick(v, position);
+                    }
+                });
             }
         } else {
-
+            holder.itemView.setOnClickListener(v -> {
+                if (onAddClickListener != null) {
+                    onAddClickListener.onClick(v);
+                }
+            });
         }
     }
 
@@ -105,13 +133,8 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     static class AddViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView mIvCover;
-        TextView mTvTitle;
-
         AddViewHolder(@NonNull View itemView) {
             super(itemView);
-            mIvCover = itemView.findViewById(R.id.iv_book_cover);
-            mTvTitle = itemView.findViewById(R.id.tv_book_title);
         }
     }
 }

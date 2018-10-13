@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
+import com.csming.dontforgetme.book.AddBookActivity;
 import com.csming.dontforgetme.common.model.ApiResultModelKt;
+import com.csming.dontforgetme.common.model.BookModel;
 import com.csming.dontforgetme.common.model.BooksModel;
 import com.csming.dontforgetme.common.model.LoginResultModel;
 import com.csming.dontforgetme.common.widget.AutofitRecyclerView;
@@ -30,6 +32,7 @@ import timber.log.Timber;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -165,6 +168,15 @@ public class MainActivity extends DaggerAppCompatActivity {
         mAdapterBooks = new BooksListAdapter();
         mRvBooks.setAdapter(mAdapterBooks);
         mRvBooks.setColumnWidth((int) (Resources.getSystem().getDisplayMetrics().density * 100));
+
+        mAdapterBooks.setOnAddClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, AddBookActivity.class);
+            startActivity(intent);
+        });
+
+        mAdapterBooks.setOnItemClickListener((view, position) -> {
+//            BookModel bookModel =
+        });
 
     }
 
