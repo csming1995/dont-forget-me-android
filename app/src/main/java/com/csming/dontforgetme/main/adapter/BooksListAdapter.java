@@ -8,9 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.config.ApiConfig;
 import com.csming.dontforgetme.common.model.BookModel;
+import com.csming.dontforgetme.common.widget.GlideRoundTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +55,10 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.Book
     public void onBindViewHolder(@NonNull BooksViewHolder holder, int position) {
         BookModel book = books.get(position);
         if (book != null) {
+            RequestOptions options = new RequestOptions().circleCrop().transform(new GlideRoundTransform(holder.mIvCover.getContext()));
             Glide.with(holder.mIvCover.getContext())
                     .load(BASE_URL + book.getFrontCover())
+                    .apply(options)
                     .into(holder.mIvCover);
             holder.mTvTitle.setText(book.getBookName());
         }

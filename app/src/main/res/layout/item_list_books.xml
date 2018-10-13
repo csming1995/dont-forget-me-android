@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="120dp"
-    android:layout_height="120dp">
+    android:layout_height="120dp"
+    android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/iv_book_cover"
@@ -10,15 +11,16 @@
         android:layout_height="72dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center|top"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        android:translationZ="10dp"/>
 
     <TextView
         android:id="@+id/tv_book_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AAA"
         android:textColor="@color/color_black"
-        android:textSize="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="14dp"
         android:layout_gravity="center"
         android:gravity="center"
         />
