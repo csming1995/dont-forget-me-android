@@ -1,6 +1,7 @@
 package com.csming.dontforgetme.main;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.csming.dontforgetme.ApplicationConfig;
@@ -163,6 +164,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 
         mAdapterBooks = new BooksListAdapter();
         mRvBooks.setAdapter(mAdapterBooks);
+        mRvBooks.setColumnWidth((int) (Resources.getSystem().getDisplayMetrics().density * 100));
 
     }
 
