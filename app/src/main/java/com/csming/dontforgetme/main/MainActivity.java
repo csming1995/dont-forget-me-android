@@ -8,12 +8,11 @@ import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.book.AddBookActivity;
 import com.csming.dontforgetme.common.model.ApiResultModelKt;
-import com.csming.dontforgetme.common.model.BookModel;
 import com.csming.dontforgetme.common.model.BooksModel;
-import com.csming.dontforgetme.common.model.LoginResultModel;
 import com.csming.dontforgetme.common.widget.AutofitRecyclerView;
 import com.csming.dontforgetme.main.adapter.BooksListAdapter;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
+import com.csming.dontforgetme.timeline.activity.PostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.material.navigation.NavigationView;
@@ -24,15 +23,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import dagger.android.support.DaggerAppCompatActivity;
-import timber.log.Timber;
 
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -176,6 +170,10 @@ public class MainActivity extends DaggerAppCompatActivity {
 
         mAdapterBooks.setOnItemClickListener((view, position) -> {
 //            BookModel bookModel =
+        });
+
+        mFabPublish.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, PostActivity.class));
         });
 
     }
