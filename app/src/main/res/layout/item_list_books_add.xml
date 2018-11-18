@@ -14,8 +14,8 @@
         android:background="@drawable/background_round_rect_gray">
         <ImageView
             android:id="@+id/iv_book_cover"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_add_9e9e9e"
             />

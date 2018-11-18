@@ -13,4 +13,10 @@
     <string name="register_phone_error">手机号码格式不合法</string>
 
     <string name="post_hint">忘了这个世界, 我也不会忘记你</string>
+
+    <string name="add_book">新本砸</string>
+    <string name="add_book_title">标题</string>
+    <string name="add_book_description">简介 (Nice To Have)</string>
+    <string name="add_book_is_private">设为私密</string>
+
 </resources>
