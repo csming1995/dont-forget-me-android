@@ -2,9 +2,7 @@ package com.csming.dontforgetme.timeline
 
 import androidx.lifecycle.ViewModel
 import com.csming.dontforgetme.common.di.ViewModelKey
-import com.csming.dontforgetme.main.repository.BookRepository
-import com.csming.dontforgetme.main.repository.impl.BookRepositoryImpl
-import com.csming.dontforgetme.main.viewmodel.MainViewModel
+import com.csming.dontforgetme.timeline.viewmodel.TimelineViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -14,9 +12,9 @@ internal abstract class TimelineModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    internal abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+    @ViewModelKey(TimelineViewModel::class)
+    internal abstract fun bindTimelineViewModel(viewModel: TimelineViewModel): ViewModel
 
-    @Binds
-    internal abstract fun bindBookRepository(repository: BookRepositoryImpl): BookRepository
+//    @Binds
+//    internal abstract fun bindBookRepository(repository: BookRepositoryImpl): BookRepository
 }

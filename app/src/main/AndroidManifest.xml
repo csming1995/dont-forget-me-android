@@ -27,17 +27,15 @@
             android:theme="@style/AppThemeNoActionBar"></activity>
         <activity
             android:name=".main.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppThemeNoActionBar"></activity>
         <activity
             android:name=".book.AddBookActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppThemeNoActionBar"></activity>
 
         <activity
             android:name=".timeline.activity.PostActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 </manifest>

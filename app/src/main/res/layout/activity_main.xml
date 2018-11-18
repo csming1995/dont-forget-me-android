@@ -25,7 +25,8 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
                 android:background="@color/color_424242"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -59,12 +60,12 @@
 
         <com.csming.dontforgetme.common.widget.AutofitRecyclerView
             android:id="@+id/rv_books"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="?attr/actionBarSize"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_publish"
+            android:id="@+id/fab_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

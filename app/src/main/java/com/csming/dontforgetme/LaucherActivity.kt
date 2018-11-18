@@ -3,7 +3,6 @@ package com.csming.dontforgetme
 import android.content.Intent
 import android.os.Bundle
 import com.csming.dontforgetme.login.activity.LoginActivity
-import com.csming.dontforgetme.timeline.activity.PostActivity
 import dagger.android.support.DaggerAppCompatActivity
 
 class LaucherActivity : DaggerAppCompatActivity() {
@@ -16,8 +15,8 @@ class LaucherActivity : DaggerAppCompatActivity() {
     }
 
     private fun startNextActivity() {
-//        startActivity(Intent(this, LoginActivity::class.java))
-        startActivity(Intent(this, PostActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
+//        startActivity(Intent(this, PostActivity::class.java))
         finish()
     }
 }

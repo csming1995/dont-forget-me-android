@@ -3,6 +3,11 @@ package com.csming.dontforgetme.main;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
@@ -14,26 +19,19 @@ import com.csming.dontforgetme.main.adapter.BooksListAdapter;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
 import com.csming.dontforgetme.timeline.activity.PostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import dagger.android.support.DaggerAppCompatActivity;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
 import javax.inject.Inject;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import dagger.android.support.DaggerAppCompatActivity;
 
 public class MainActivity extends DaggerAppCompatActivity {
 
@@ -42,7 +40,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     private DrawerLayout mDrawer;
     private NavigationView mNavMenu;
 
-    private FloatingActionButton mFabPublish;
+    private FloatingActionButton mFabPost;
 
     private ImageView mIvToolbarHeader;
     private TextView mTvToolbarUserName;
@@ -95,6 +93,9 @@ public class MainActivity extends DaggerAppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 初始化ToolBar
+     */
     private void initToolBar() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -105,6 +106,9 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
     }
 
+    /**
+     * 初始化数据
+     */
     private void initData() {
         mainViewModel = ViewModelProviders.of(this, factory).get(MainViewModel.class);
         mainViewModel.setToken(ApplicationConfig.getToken(this));
@@ -126,7 +130,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     private void initView() {
         mDrawer = findViewById(R.id.drawer_layout);
 
-        mFabPublish = findViewById(R.id.fab_publish);
+        mFabPost = findViewById(R.id.fab_post);
 
         mNavMenu = findViewById(R.id.nav_main_menu);
 
@@ -142,6 +146,7 @@ public class MainActivity extends DaggerAppCompatActivity {
             mDrawer.openDrawer(GravityCompat.START);
         });
 
+        // 侧边栏的菜单
         mNavMenu.setNavigationItemSelectedListener(menuItem -> {
             int id = menuItem.getItemId();
 
@@ -172,7 +177,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 //            BookModel bookModel =
         });
 
-        mFabPublish.setOnClickListener(v -> {
+        mFabPost.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, PostActivity.class));
         });
 
