@@ -12,64 +12,73 @@
         android:layout_height="match_parent"
         tools:context=".main.MainActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <!--<ImageView-->
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <!--<ImageView-->
                 <!--android:layout_width=""-->
                 <!--android:layout_height="" />-->
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:gravity="center"
-                android:background="@color/color_424242"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:gravity="center"
+                    android:background="@color/color_424242"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <ImageView
-                    android:id="@+id/iv_toolbar_user_header"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@mipmap/ic_launcher_round"/>
+                    <ImageView
+                        android:id="@+id/iv_toolbar_user_header"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@mipmap/ic_launcher_round" />
 
-                <TextView
-                    android:id="@+id/tv_toolbar_user_name"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tv_toolbar_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UserA"
+                        android:textSize="16dp"
+                        android:textColor="@color/color_white"
+                        android:layout_gravity="start"
+                        android:gravity="center" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tl_titles"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="UserA"
-                    android:textSize="16dp"
-                    android:textColor="@color/color_white"
-                    android:layout_gravity="start"
-                    android:gravity="center"/>
+                    android:background="@color/colorPrimary"
+                    app:tabIndicatorColor="@color/color_white"
+                    app:tabTextColor="@color/color_white"
+                    app:tabSelectedTextColor="@color/color_white"
+                    app:tabMode="fixed" />
 
-            </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
 
-        </com.google.android.material.appbar.AppBarLayout>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></androidx.viewpager.widget.ViewPager>
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="hello world"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:gravity="center"/>-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                app:srcCompat="@drawable/ic_add" />
 
-        <com.csming.dontforgetme.common.widget.AutofitRecyclerView
-            android:id="@+id/rv_books"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_add" />
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
