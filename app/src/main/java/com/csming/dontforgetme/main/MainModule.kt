@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.csming.dontforgetme.common.di.FragmentScoped
 import com.csming.dontforgetme.common.di.ViewModelKey
 import com.csming.dontforgetme.main.fragment.BooksFragment
+import com.csming.dontforgetme.main.fragment.MainTimelineFragment
 import com.csming.dontforgetme.main.repository.BookRepository
 import com.csming.dontforgetme.main.repository.impl.BookRepositoryImpl
 import com.csming.dontforgetme.main.viewmodel.MainViewModel
@@ -25,5 +26,9 @@ internal abstract class MainModule {
 
     @FragmentScoped
     @ContributesAndroidInjector(modules = [])
-    internal abstract fun contributeInfoFragment(): BooksFragment
+    internal abstract fun contributeBooksFragment(): BooksFragment
+
+    @FragmentScoped
+    @ContributesAndroidInjector(modules = [])
+    internal abstract fun contributeMainTimelineFragment(): MainTimelineFragment
 }

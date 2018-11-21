@@ -11,6 +11,7 @@ import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.adapter.ViewPagerAdapter;
 import com.csming.dontforgetme.main.fragment.BooksFragment;
+import com.csming.dontforgetme.main.fragment.MainTimelineFragment;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
 import com.csming.dontforgetme.timeline.activity.PostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -69,6 +70,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         initView();
 
         freshBooks();
+        freshDailies();
     }
 
     @Override
@@ -136,7 +138,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         // 初始化viewpager
         mFragments = new ArrayList<>(2);
         mFragments.add(BooksFragment.getInstance());
-        mFragments.add(BooksFragment.getInstance());
+        mFragments.add(MainTimelineFragment.getInstance());
         mFragmentTitles = new ArrayList<>(2);
         mFragmentTitles.add(getString(R.string.main_tag_books));
         mFragmentTitles.add(getString(R.string.main_tag_timeline));
@@ -177,5 +179,9 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     private void freshBooks() {
         mainViewModel.getBooks();
+    }
+
+    private void freshDailies() {
+        mainViewModel.getDailies();
     }
 }
