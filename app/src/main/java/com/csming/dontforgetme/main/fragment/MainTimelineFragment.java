@@ -11,7 +11,10 @@ import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.model.ApiResultModelKt;
 import com.csming.dontforgetme.common.model.RecordingsModel;
+import com.csming.dontforgetme.main.adapter.DailiesListAdapter;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
+
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -19,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 import dagger.android.support.DaggerFragment;
 import timber.log.Timber;
 
@@ -26,6 +30,10 @@ import timber.log.Timber;
  * @author Created by csming on 2018/11/21.
  */
 public class MainTimelineFragment extends DaggerFragment {
+
+
+    private RecyclerView mRvDailies;
+    private DailiesListAdapter mDailiesListAdapter;
 
 
     @Inject
@@ -73,7 +81,7 @@ public class MainTimelineFragment extends DaggerFragment {
             } else if (apiResultModel.getData() != null) {
                 RecordingsModel recordingsModel = apiResultModel.getData();
                 if (recordingsModel.getRecordings() != null && recordingsModel.getRecordings().length > 0) {
-//                    mAdapterBooks.setData(Arrays.asList(booksModel.getRecordings()));
+                    mDailiesListAdapter.setData(Arrays.asList(recordingsModel.getRecordings()));
                 } else {
                     Toast.makeText(getActivity(), recordingsModel.getError_body(), Toast.LENGTH_SHORT).show();
                 }
@@ -83,6 +91,12 @@ public class MainTimelineFragment extends DaggerFragment {
     }
 
     private void initView(View view) {
+        mRvDailies = view.findViewById(R.id.rv_books);
+        mDailiesListAdapter = new DailiesListAdapter();
+        mRvDailies.setAdapter(mDailiesListAdapter);
 
+        mDailiesListAdapter.setOnItemClickListener((v, position) -> {
+//            BookModel bookModel =
+        });
     }
 }

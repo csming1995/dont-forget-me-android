@@ -6,6 +6,8 @@ package com.csming.dontforgetme.common.model
 class RecordingModel(
         error_body: String? = null,
         val recordId: Long? = null,
-        val outher: UserModel? = null,
-        val description: String
+        val auther: UserModel? = null,
+        val book: BookModel? = null,
+        val description: String,
+        val createTime: String
 ) : BaseModel(error_body)

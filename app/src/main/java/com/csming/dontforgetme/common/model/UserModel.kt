@@ -1,9 +1,10 @@
 package com.csming.dontforgetme.common.model
 
 class UserModel(
-        var userName: String? = null,
-        var description: String? = null,
-        var weibo: String? = null,
-        var wechat: String? = null,
-        var qq: String? = null
+        val header: String? = null,
+        val userName: String? = null,
+        val description: String? = null,
+        val weibo: String? = null,
+        val wechat: String? = null,
+        val qq: String? = null
 )
