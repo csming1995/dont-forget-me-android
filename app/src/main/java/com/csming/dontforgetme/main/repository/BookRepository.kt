@@ -1,14 +1,15 @@
 package com.csming.dontforgetme.main.repository
 
-import com.csming.dontforgetme.common.model.BooksModel
-import com.csming.dontforgetme.common.model.RecordingsModel
+import com.csming.dontforgetme.common.model.BookModel
+import com.csming.dontforgetme.common.model.RecordingModel
+import rx.Observer
 
 /**
  * @author Created by csming on 2018/10/4.
  */
 interface BookRepository {
 
-    fun getBooks(token: String): BooksModel?
+    fun getBooks(token: String, observer: Observer<List<BookModel>?>)
 
-    fun getDailies(token: String): RecordingsModel?
+    fun getDailies(token: String, observer: Observer<List<RecordingModel>?>)
 }

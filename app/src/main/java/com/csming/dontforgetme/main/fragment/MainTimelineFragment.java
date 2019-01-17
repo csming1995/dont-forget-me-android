@@ -9,12 +9,12 @@ import android.widget.Toast;
 
 import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
-import com.csming.dontforgetme.common.model.ApiResultModelKt;
-import com.csming.dontforgetme.common.model.RecordingsModel;
+import com.csming.dontforgetme.common.model.NetModelKt;
+import com.csming.dontforgetme.common.model.RecordingModel;
 import com.csming.dontforgetme.main.adapter.DailiesListAdapter;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
 
-import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,7 +24,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import dagger.android.support.DaggerFragment;
-import timber.log.Timber;
 
 /**
  * @author Created by csming on 2018/11/21.
@@ -75,18 +74,17 @@ public class MainTimelineFragment extends DaggerFragment {
         mainViewModel = ViewModelProviders.of(getActivity(), factory).get(MainViewModel.class);
         mainViewModel.setToken(ApplicationConfig.getToken(getActivity()));
 
-        mainViewModel.getDailyLiveData().observe(getActivity(), apiResultModel -> {
-            if (apiResultModel.getState() == ApiResultModelKt.NET_ERROR) {
-                Toast.makeText(getActivity(), "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
-            } else if (apiResultModel.getData() != null) {
-                RecordingsModel recordingsModel = apiResultModel.getData();
-                if (recordingsModel.getRecordings() != null && recordingsModel.getRecordings().length > 0) {
-                    mDailiesListAdapter.setData(Arrays.asList(recordingsModel.getRecordings()));
-                } else {
-                    Toast.makeText(getActivity(), recordingsModel.getError_body(), Toast.LENGTH_SHORT).show();
+        mainViewModel.getDailyLiveData().observe(getActivity(), netModel -> {
+            if (netModel != null) {
+                if (netModel.getStatus() == NetModelKt.NET_ERROR) {
+                    Toast.makeText(getActivity(), "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
+                } else if (netModel.getData() != null) {
+                    List<RecordingModel> recordingModels = netModel.getData();
+                    if (recordingModels != null && recordingModels.size() > 0) {
+                        mDailiesListAdapter.setData(recordingModels);
+                    }
                 }
             }
-            Timber.d(apiResultModel.toString());
         });
     }
 

@@ -3,13 +3,10 @@ package com.csming.dontforgetme.login.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.csming.dontforgetme.common.model.ApiResultModel
 import com.csming.dontforgetme.common.model.NET_ERROR
-import com.csming.dontforgetme.common.model.RegisterResultModel
+import com.csming.dontforgetme.common.model.NetModel
 import com.csming.dontforgetme.login.repository.RegisterRepository
 import rx.Observer
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import timber.log.Timber
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -21,8 +18,8 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
 
     val isLoading = MutableLiveData<Boolean>()
 
-    private val _registerResultLiveData = MutableLiveData<ApiResultModel<RegisterResultModel?>>()
-    val registerResultLiveData: LiveData<ApiResultModel<RegisterResultModel?>>
+    private val _registerResultLiveData = MutableLiveData<NetModel<String?>>()
+    val registerResultLiveData: LiveData<NetModel<String?>>
         get() = _registerResultLiveData
 
     /**
@@ -36,38 +33,26 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
 
     fun register(phoneNum: String, password: String) {
 
-        rx.Observable.create<RegisterResultModel> {
-            isLoading.postValue(true)
-            var result: RegisterResultModel? = null
-            try {
-                result = registerRepository.register(phoneNum, password)
-            } catch (e: Exception) {
-                it.onError(e)
+        isLoading.postValue(true)
+        registerRepository.register("", phoneNum, password, object : Observer<String?> {
+            override fun onCompleted() {
+                isLoading.postValue(false)
             }
 
-            it.onNext(result)
-            it.onCompleted()
-        }.subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<RegisterResultModel> {
-                    override fun onCompleted() {
-                        isLoading.postValue(false)
-                    }
-                    override fun onError(e: Throwable) {
-                        isLoading.postValue(false)
-                        Timber.e(e)
-                        _registerResultLiveData.value = ApiResultModel(
-                                state = NET_ERROR
-                        )
-                    }
+            override fun onError(e: Throwable) {
+                isLoading.postValue(false)
+                Timber.e(e)
+                _registerResultLiveData.value = NetModel(
+                        status = NET_ERROR
+                )
+            }
 
-                    override fun onNext(registerResultModel: RegisterResultModel?) {
-                        _registerResultLiveData.value = ApiResultModel(
-                                data = registerResultModel
-                        )
-                    }
-                })
+            override fun onNext(message: String?) {
+                _registerResultLiveData.value = NetModel(
+                        data = message
+                )
+            }
+        })
     }
 
 }

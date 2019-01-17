@@ -12,11 +12,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.csming.dontforgetme.Contacts;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.LoadingFragment;
-import com.csming.dontforgetme.common.model.ApiResultModelKt;
-import com.csming.dontforgetme.common.model.RegisterResultModel;
+import com.csming.dontforgetme.common.model.NetModelKt;
 import com.csming.dontforgetme.login.viewmodel.RegisterViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -75,17 +73,17 @@ public class RegisterActivity extends DaggerAppCompatActivity {
             }
         });
 
-        registerViewModel.getRegisterResultLiveData().observe(this, apiResultModel -> {
-            if (apiResultModel.getState() == ApiResultModelKt.NET_ERROR){
-                Toast.makeText(this, "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
-            } else {
-                RegisterResultModel registerResultModel = apiResultModel.getData();
-                if ("success" .equals(registerResultModel.getResult())) {
-                    Toast.makeText(this, "恭喜你，成为了「不忘」的一员", Toast.LENGTH_SHORT).show();
-                    setResult();
-                    finish();
+        registerViewModel.getRegisterResultLiveData().observe(this, netModel -> {
+            if (netModel != null) {
+                if (netModel.getStatus() == NetModelKt.NET_ERROR) {
+                    Toast.makeText(this, "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, registerResultModel.getError_body(), Toast.LENGTH_SHORT).show();
+                    String result = netModel.getData();
+                    if ("success".equals(result)) {
+                        Toast.makeText(this, "恭喜你，成为了「不忘」的一员", Toast.LENGTH_SHORT).show();
+                        setResult();
+                        finish();
+                    }
                 }
             }
         });

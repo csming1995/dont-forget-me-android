@@ -1,12 +1,5 @@
 package com.csming.dontforgetme.login.activity;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import dagger.android.support.DaggerAppCompatActivity;
-import timber.log.Timber;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,14 +16,16 @@ import android.widget.Toast;
 import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.Contacts;
 import com.csming.dontforgetme.R;
-import com.csming.dontforgetme.common.model.ApiResultModel;
-import com.csming.dontforgetme.common.model.ApiResultModelKt;
-import com.csming.dontforgetme.common.model.LoginResultModel;
-import com.csming.dontforgetme.common.model.RegisterResultModel;
+import com.csming.dontforgetme.common.model.NetModelKt;
 import com.csming.dontforgetme.login.viewmodel.LoginViewModel;
 import com.csming.dontforgetme.main.MainActivity;
 
 import javax.inject.Inject;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import dagger.android.support.DaggerAppCompatActivity;
 
 public class LoginActivity extends DaggerAppCompatActivity {
 
@@ -79,18 +74,18 @@ public class LoginActivity extends DaggerAppCompatActivity {
     private void initData() {
         loginViewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel.class);
 
-        loginViewModel.getLoginResultLiveData().observe(this, apiResultModel -> {
-            if (apiResultModel.getState() == ApiResultModelKt.NET_ERROR){
-                Toast.makeText(this, "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
-            } else {
-                LoginResultModel loginResultModel = apiResultModel.getData();
-                if (!TextUtils.isEmpty(loginResultModel.getToken())) {
-                    ApplicationConfig.setToken(this, loginResultModel.getToken());
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+        loginViewModel.getLoginResultLiveData().observe(this, netModel -> {
+            if (netModel != null) {
+                if (netModel.getStatus() == NetModelKt.NET_ERROR) {
+                    Toast.makeText(this, "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, loginResultModel.getError_body(), Toast.LENGTH_SHORT).show();
+                    String result = netModel.getData();
+                    if (!TextUtils.isEmpty(result)) {
+                        ApplicationConfig.setToken(this, result);
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });

@@ -1,10 +1,7 @@
 package com.csming.dontforgetme.common.model
 
-/**
- * @author Created by csming on 2018/10/4.
- */
-data class ApiResultModel<T>(
-        val state: Int = SUCCESS,
+data class NetModel<T>(
+        val status: Int? = null,
         val data: T? = null
 )
 

@@ -1,24 +1,25 @@
 package com.csming.dontforgetme.login.repository.impl
 
-import com.csming.dontforgetme.common.model.LoginResultModel
-import com.csming.dontforgetme.api.LoginApi
+import com.csming.dontforgetme.api.AccountApi
 import com.csming.dontforgetme.login.repository.LoginRepository
+import rx.Observer
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
  * @author Created by csming on 2018/10/4.
  */
 class LoginRepositoryImpl @Inject constructor(
-        private val loginApi: LoginApi
+        private val accountApi: AccountApi
 ) : LoginRepository {
 
 
-    override fun login(userId: String, password: String): LoginResultModel? {
-        val call = loginApi.login(userId, password)
-        val response = call.execute()
-        if (response.isSuccessful) {
-            return response.body()
-        }
-        return null
+    override fun login(name: String, password: String, observer: Observer<String?>) {
+        accountApi.login(name, password)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer)
     }
 }

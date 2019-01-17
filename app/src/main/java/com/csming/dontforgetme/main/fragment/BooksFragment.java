@@ -12,13 +12,13 @@ import android.widget.Toast;
 import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.book.AddBookActivity;
-import com.csming.dontforgetme.common.model.ApiResultModelKt;
-import com.csming.dontforgetme.common.model.BooksModel;
+import com.csming.dontforgetme.common.model.BookModel;
+import com.csming.dontforgetme.common.model.NetModelKt;
 import com.csming.dontforgetme.common.widget.AutofitRecyclerView;
 import com.csming.dontforgetme.main.adapter.BooksListAdapter;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
 
-import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -80,15 +80,15 @@ public class BooksFragment extends DaggerFragment {
         mainViewModel = ViewModelProviders.of(getActivity(), factory).get(MainViewModel.class);
         mainViewModel.setToken(ApplicationConfig.getToken(getActivity()));
 
-        mainViewModel.getBookLiveData().observe(this, apiResultModel -> {
-            if (apiResultModel.getState() == ApiResultModelKt.NET_ERROR) {
-                Toast.makeText(getActivity(), "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
-            } else if (apiResultModel.getData() != null) {
-                BooksModel booksModel = apiResultModel.getData();
-                if (booksModel.getBooks() != null && booksModel.getBooks().length > 0) {
-                    mAdapterBooks.setData(Arrays.asList(booksModel.getBooks()));
-                } else {
-                    Toast.makeText(getActivity(), booksModel.getError_body(), Toast.LENGTH_SHORT).show();
+        mainViewModel.getBookLiveData().observe(this, netModel -> {
+            if (netModel != null) {
+                if (netModel.getStatus() == NetModelKt.NET_ERROR) {
+                    Toast.makeText(getActivity(), "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
+                } else if (netModel.getData() != null) {
+                    List<BookModel> bookModels = netModel.getData();
+                    if (bookModels != null && bookModels.size() > 0) {
+                        mAdapterBooks.setData(bookModels);
+                    }
                 }
             }
         });
