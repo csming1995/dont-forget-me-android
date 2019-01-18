@@ -4,10 +4,11 @@ import com.csming.dontforgetme.api.BookApi
 import com.csming.dontforgetme.api.DailyApi
 import com.csming.dontforgetme.common.model.BookModel
 import com.csming.dontforgetme.common.model.RecordingModel
+import com.csming.dontforgetme.common.model.UserModel
 import com.csming.dontforgetme.main.repository.BookRepository
-import rx.Observer
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -20,11 +21,27 @@ class BookRepositoryImpl @Inject constructor(
 
 
     override fun getBooks(token: String, observer: Observer<List<BookModel>?>) {
-        bookApi.getBooks(token)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer)
+//        bookApi.getBooks(token)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer)
+
+        val list = ArrayList<BookModel>(1)
+        list.add(BookModel(
+                owner = UserModel(
+                        "",
+                        "少棉",
+                        "",
+                        "",
+                        "",
+                        ""
+                ),
+                bookName = "喵子",
+                frontCover = "",
+                description = ""
+        ))
+        observer.onNext(list)
     }
 
     override fun getDailies(token: String, observer: Observer<List<RecordingModel>?>) {

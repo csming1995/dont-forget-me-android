@@ -4,8 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.csming.dontforgetme.common.widget.AutofitRecyclerView
-        android:id="@+id/rv_books"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_books"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.csming.dontforgetme.common.widget.AutofitRecyclerView
+            android:id="@+id/rv_books"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

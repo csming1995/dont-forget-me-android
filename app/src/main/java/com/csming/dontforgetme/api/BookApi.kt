@@ -2,8 +2,8 @@ package com.csming.dontforgetme.api
 
 import com.csming.dontforgetme.common.config.BASE_PATH
 import com.csming.dontforgetme.common.model.BookModel
+import io.reactivex.Observable
 import retrofit2.http.*
-import rx.Observable
 
 /**
  * @author Created by csming on 2018/10/4.

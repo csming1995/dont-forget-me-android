@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -84,6 +83,7 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (book != null) {
                 RequestOptions options = new RequestOptions()
                         .circleCrop()
+                        .error(R.mipmap.ic_launcher_foreground)
                         .transform(new GlideRoundTransform(((BooksNormalViewHolder) holder).mIvCover.getContext()));
                 Glide.with(((BooksNormalViewHolder) holder).mIvCover.getContext())
                         .load(BASE_URL + book.getFrontCover())

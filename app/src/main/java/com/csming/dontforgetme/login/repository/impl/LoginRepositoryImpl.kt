@@ -3,8 +3,6 @@ package com.csming.dontforgetme.login.repository.impl
 import com.csming.dontforgetme.api.AccountApi
 import com.csming.dontforgetme.login.repository.LoginRepository
 import rx.Observer
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -16,10 +14,12 @@ class LoginRepositoryImpl @Inject constructor(
 
 
     override fun login(name: String, password: String, observer: Observer<String?>) {
-        accountApi.login(name, password)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer)
+//        accountApi.login(name, password)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer)
+
+        observer.onNext("token")
     }
 }

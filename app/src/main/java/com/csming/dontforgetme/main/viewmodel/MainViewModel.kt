@@ -3,12 +3,10 @@ package com.csming.dontforgetme.main.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.csming.dontforgetme.common.model.BookModel
-import com.csming.dontforgetme.common.model.NET_ERROR
-import com.csming.dontforgetme.common.model.NetModel
-import com.csming.dontforgetme.common.model.RecordingModel
+import com.csming.dontforgetme.common.model.*
 import com.csming.dontforgetme.main.repository.BookRepository
-import rx.Observer
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -35,7 +33,11 @@ class MainViewModel @Inject constructor(
     fun getBooks() {
 
         bookRepository.getBooks(token, object : Observer<List<BookModel>?> {
-            override fun onCompleted() {
+
+            override fun onSubscribe(d: Disposable?) {
+            }
+
+            override fun onComplete() {
                 isLoading.postValue(false)
             }
 
@@ -49,6 +51,7 @@ class MainViewModel @Inject constructor(
 
             override fun onNext(bookModels: List<BookModel>?) {
                 _bookLiveData.value = NetModel(
+                        status = SUCCESS,
                         data = bookModels
                 )
             }
@@ -60,8 +63,13 @@ class MainViewModel @Inject constructor(
      */
     fun getDailies() {
         bookRepository.getDailies(token, object : Observer<List<RecordingModel>?> {
-            override fun onCompleted() {
+
+            override fun onSubscribe(d: Disposable?) {
                 isLoading.postValue(false)
+            }
+
+            override fun onComplete() {
+
             }
 
             override fun onError(e: Throwable) {
@@ -74,6 +82,7 @@ class MainViewModel @Inject constructor(
 
             override fun onNext(recordingmodels: List<RecordingModel>?) {
                 _dailyLiveData.value = NetModel(
+                        status = SUCCESS,
                         data = recordingmodels
                 )
             }

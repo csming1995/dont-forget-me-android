@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.csming.dontforgetme.common.model.NET_ERROR
 import com.csming.dontforgetme.common.model.NetModel
+import com.csming.dontforgetme.common.model.SUCCESS
 import com.csming.dontforgetme.login.repository.RegisterRepository
-import rx.Observer
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
 import timber.log.Timber
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -35,9 +37,11 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
 
         isLoading.postValue(true)
         registerRepository.register("", phoneNum, password, object : Observer<String?> {
-            override fun onCompleted() {
+            override fun onComplete() {
                 isLoading.postValue(false)
             }
+
+            override fun onSubscribe(d: Disposable?) {}
 
             override fun onError(e: Throwable) {
                 isLoading.postValue(false)
@@ -49,6 +53,7 @@ class RegisterViewModel @Inject constructor(private val registerRepository: Regi
 
             override fun onNext(message: String?) {
                 _registerResultLiveData.value = NetModel(
+                        status = SUCCESS,
                         data = message
                 )
             }

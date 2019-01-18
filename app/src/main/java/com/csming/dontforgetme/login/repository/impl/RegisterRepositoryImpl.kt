@@ -2,9 +2,9 @@ package com.csming.dontforgetme.login.repository.impl
 
 import com.csming.dontforgetme.api.AccountApi
 import com.csming.dontforgetme.login.repository.RegisterRepository
-import rx.Observer
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**

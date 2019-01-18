@@ -2,7 +2,7 @@ package com.csming.dontforgetme.main.repository
 
 import com.csming.dontforgetme.common.model.BookModel
 import com.csming.dontforgetme.common.model.RecordingModel
-import rx.Observer
+import io.reactivex.Observer
 
 /**
  * @author Created by csming on 2018/10/4.

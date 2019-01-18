@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.csming.dontforgetme.common.model.NET_ERROR
 import com.csming.dontforgetme.common.model.NetModel
+import com.csming.dontforgetme.common.model.SUCCESS
 import com.csming.dontforgetme.login.repository.LoginRepository
 import rx.Observer
 import timber.log.Timber
@@ -40,6 +41,7 @@ class LoginViewModel @Inject constructor(
 
             override fun onNext(message: String?) {
                 _loginResultLiveData.value = NetModel(
+                        status = SUCCESS,
                         data = message
                 )
             }

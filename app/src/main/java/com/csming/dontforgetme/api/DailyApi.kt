@@ -2,9 +2,9 @@ package com.csming.dontforgetme.api
 
 import com.csming.dontforgetme.common.config.BASE_PATH
 import com.csming.dontforgetme.common.model.RecordingModel
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
-import rx.Observable
 
 /**
  * @author Created by csming on 2018/10/4.

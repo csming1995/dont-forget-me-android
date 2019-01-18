@@ -27,12 +27,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.android.support.DaggerFragment;
 
 /**
  * @author Created by csming on 2018/11/20.
  */
 public class BooksFragment extends DaggerFragment {
+
+    private SwipeRefreshLayout mSrlBooks;
 
     private AutofitRecyclerView mRvBooks;
     private BooksListAdapter mAdapterBooks;
@@ -68,6 +71,14 @@ public class BooksFragment extends DaggerFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mSrlBooks.setOnRefreshListener(() -> {
+            mainViewModel.getBooks();
+        });
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         initData();
@@ -81,6 +92,9 @@ public class BooksFragment extends DaggerFragment {
         mainViewModel.setToken(ApplicationConfig.getToken(getActivity()));
 
         mainViewModel.getBookLiveData().observe(this, netModel -> {
+            if (mSrlBooks != null) {
+                mSrlBooks.setRefreshing(false);
+            }
             if (netModel != null) {
                 if (netModel.getStatus() == NetModelKt.NET_ERROR) {
                     Toast.makeText(getActivity(), "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
@@ -95,6 +109,7 @@ public class BooksFragment extends DaggerFragment {
     }
 
     private void initView(View view) {
+        mSrlBooks = view.findViewById(R.id.srl_books);
         mRvBooks = view.findViewById(R.id.rv_books);
         mAdapterBooks = new BooksListAdapter();
         mRvBooks.setAdapter(mAdapterBooks);
