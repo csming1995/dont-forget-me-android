@@ -24,4 +24,6 @@
 
     <string name="book_day_to_start_unit">Day</string>
 
+    <string name="daliy_book_name_format">[%s]</string>
+
 </resources>

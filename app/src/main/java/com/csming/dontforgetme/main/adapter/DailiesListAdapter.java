@@ -53,7 +53,7 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.item_timeline, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_daily, parent, false);
         return new TimelinesViewHolder(view);
     }
 
@@ -72,7 +72,6 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 Glide.with(((TimelinesViewHolder) holder).mIvImages.getContext())
                         .load(position % 2 == 1 ? R.drawable.cat_test : R.drawable.cat_test2)
                         .into(((TimelinesViewHolder) holder).mIvImages);
-                ((TimelinesViewHolder) holder).setDescription(recording.getText());
                 ((TimelinesViewHolder) holder).setDescription(recording.getText());
                 ((TimelinesViewHolder) holder).setCreateTime(DateformatUtils.formatDate(recording.getCreateTime()));
             }
@@ -117,7 +116,8 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         void setBookName(String bookName) {
             if (!TextUtils.isEmpty(bookName)) {
-                mTvBookName.setText(bookName);
+                String name = itemView.getContext().getString(R.string.daliy_book_name_format, bookName);
+                mTvBookName.setText(name);
             }
         }
 

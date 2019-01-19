@@ -34,28 +34,17 @@
                 android:textColor="@color/color_black"
                 android:textSize="14dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="60dp" />
+                android:layout_marginStart="56dp" />
 
             <TextView
-                android:id="@+id/tv_book_title"
+                android:id="@+id/tv_create_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="xxx"
                 android:textSize="14dp"
                 android:textColor="@color/color_757575"
                 android:layout_marginTop="28dp"
-                android:layout_marginStart="60dp" />
-
-            <TextView
-                android:id="@+id/tv_create_time"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:layout_gravity="top|end"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
-                android:textSize="14dp"
-                android:textColor="@color/color_757575" />
-
+                android:layout_marginStart="56dp" />
 
         </FrameLayout>
 
@@ -81,18 +70,29 @@
                 android:layout_gravity="center"
                 android:textColor="@color/color_black" />
 
+            <TextView
+                android:id="@+id/tv_book_title"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="14dp"
+                android:textColor="@color/color_757575" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
-                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/iv_upvote"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center" />
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_heart" />
 
                 <!--<TextView-->
                 <!--android:id="@+id/tv_upvote_count"-->
