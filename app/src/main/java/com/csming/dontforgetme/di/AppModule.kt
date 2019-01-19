@@ -7,6 +7,7 @@ import com.csming.dontforgetme.MainApplication
 import com.csming.dontforgetme.api.AccountApi
 import com.csming.dontforgetme.api.BookApi
 import com.csming.dontforgetme.api.DailyApi
+import com.csming.dontforgetme.api.UserApi
 import com.csming.dontforgetme.common.config.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -46,6 +47,11 @@ class AppModule {
     @Provides
     fun providerAccountApi(retrofit: Retrofit): AccountApi {
         return retrofit.create(AccountApi::class.java)
+    }
+
+    @Provides
+    fun providerUserApi(retrofit: Retrofit): UserApi {
+        return retrofit.create(UserApi::class.java)
     }
 
     @Provides

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.csming.dontforgetme.common.model.NET_ERROR
 import com.csming.dontforgetme.common.model.NetModel
 import com.csming.dontforgetme.common.model.SUCCESS
-import com.csming.dontforgetme.login.repository.RegisterRepository
+import com.csming.dontforgetme.repository.RegisterRepository
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import timber.log.Timber

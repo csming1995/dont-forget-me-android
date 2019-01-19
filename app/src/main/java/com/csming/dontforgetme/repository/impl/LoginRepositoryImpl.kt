@@ -1,7 +1,7 @@
-package com.csming.dontforgetme.login.repository.impl
+package com.csming.dontforgetme.repository.impl
 
 import com.csming.dontforgetme.api.AccountApi
-import com.csming.dontforgetme.login.repository.LoginRepository
+import com.csming.dontforgetme.repository.LoginRepository
 import rx.Observer
 import javax.inject.Inject
 

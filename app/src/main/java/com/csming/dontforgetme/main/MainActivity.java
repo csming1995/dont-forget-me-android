@@ -4,14 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.adapter.ViewPagerAdapter;
+import com.csming.dontforgetme.common.model.UserModel;
 import com.csming.dontforgetme.main.fragment.BooksFragment;
-import com.csming.dontforgetme.main.fragment.MainTimelineFragment;
+import com.csming.dontforgetme.main.fragment.DailyFragment;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
 import com.csming.dontforgetme.timeline.activity.PostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,6 +34,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 import dagger.android.support.DaggerAppCompatActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends DaggerAppCompatActivity {
 
@@ -42,10 +45,10 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     private FloatingActionButton mFabPost;
 
-    private ImageView mIvToolbarHeader;
+    private CircleImageView mIvToolbarHeader;
     private TextView mTvToolbarUserName;
 
-    private ImageView mIvDrawerHeader;
+    private CircleImageView mIvDrawerHeader;
     private TextView mTvDrawerUserName;
 
     private TabLayout mTlTitle;
@@ -54,6 +57,11 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     private List<Fragment> mFragments;
     private List<String> mFragmentTitles;
+
+    // Header Glide Options
+    private RequestOptions mOptionsHeader = new RequestOptions()
+            .circleCrop()
+            .error(R.drawable.default_icon);
 
     @Inject
     ViewModelProvider.Factory factory;
@@ -66,11 +74,14 @@ public class MainActivity extends DaggerAppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initToolBar();
-        initData();
+        initViewModel();
         initView();
+    }
 
-        freshBooks();
-        freshDailies();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 
     @Override
@@ -114,9 +125,33 @@ public class MainActivity extends DaggerAppCompatActivity {
     /**
      * 初始化数据
      */
-    private void initData() {
+    private void initViewModel() {
         mainViewModel = ViewModelProviders.of(this, factory).get(MainViewModel.class);
         mainViewModel.setToken(ApplicationConfig.getToken(this));
+    }
+
+    private void initData() {
+        mainViewModel.getMe();
+
+        mainViewModel.getUserLiveData().observe(this, netModel -> {
+            if (netModel != null) {
+                if (netModel.getData() != null) {
+                    UserModel userModel = netModel.getData();
+                    if (userModel != null) {
+                        Glide.with(this)
+                                .load(userModel.getAvatar())
+                                .apply(mOptionsHeader)
+                                .into(mIvDrawerHeader);
+                        Glide.with(this)
+                                .load(userModel.getAvatar())
+                                .apply(mOptionsHeader)
+                                .into(mIvToolbarHeader);
+                        mTvToolbarUserName.setText(userModel.getNickname());
+                        mTvDrawerUserName.setText(userModel.getNickname());
+                    }
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -124,13 +159,13 @@ public class MainActivity extends DaggerAppCompatActivity {
 
         mFabPost = findViewById(R.id.fab_post);
 
-        mNavMenu = findViewById(R.id.nav_main_menu);
-
         mIvToolbarHeader = toolbar.findViewById(R.id.iv_toolbar_user_header);
         mTvToolbarUserName = toolbar.findViewById(R.id.tv_toolbar_user_name);
 
-        mIvDrawerHeader = findViewById(R.id.iv_drawer_header);
-        mTvDrawerUserName = findViewById(R.id.tv_drawer_user_name);
+        mNavMenu = findViewById(R.id.nav_main_menu);
+
+        mIvDrawerHeader = mNavMenu.getHeaderView(0).findViewById(R.id.iv_drawer_header);
+        mTvDrawerUserName = mNavMenu.getHeaderView(0).findViewById(R.id.tv_drawer_user_name);
 
         mTlTitle = findViewById(R.id.tl_titles);
         mViewPager = findViewById(R.id.viewpager_main);
@@ -138,7 +173,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         // 初始化viewpager
         mFragments = new ArrayList<>(2);
         mFragments.add(BooksFragment.getInstance());
-        mFragments.add(MainTimelineFragment.getInstance());
+        mFragments.add(DailyFragment.getInstance());
         mFragmentTitles = new ArrayList<>(2);
         mFragmentTitles.add(getString(R.string.main_tag_books));
         mFragmentTitles.add(getString(R.string.main_tag_timeline));
@@ -175,13 +210,8 @@ public class MainActivity extends DaggerAppCompatActivity {
             startActivity(new Intent(MainActivity.this, PostActivity.class));
         });
 
-    }
-
-    private void freshBooks() {
-        mainViewModel.getBooks();
-    }
-
-    private void freshDailies() {
-        mainViewModel.getDailies();
+        mIvDrawerHeader.setOnClickListener(v -> {
+            mDrawer.openDrawer(GravityCompat.START);
+        });
     }
 }

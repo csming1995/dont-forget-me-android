@@ -1,11 +1,11 @@
-package com.csming.dontforgetme.main.repository.impl
+package com.csming.dontforgetme.repository.impl
 
 import com.csming.dontforgetme.api.BookApi
 import com.csming.dontforgetme.api.DailyApi
 import com.csming.dontforgetme.common.model.BookModel
 import com.csming.dontforgetme.common.model.RecordingModel
 import com.csming.dontforgetme.common.model.UserModel
-import com.csming.dontforgetme.main.repository.BookRepository
+import com.csming.dontforgetme.repository.BookRepository
 import io.reactivex.Observer
 import java.util.*
 import javax.inject.Inject

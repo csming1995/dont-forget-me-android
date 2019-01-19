@@ -1,4 +1,4 @@
-package com.csming.dontforgetme.login.repository
+package com.csming.dontforgetme.repository
 
 import io.reactivex.Observer
 

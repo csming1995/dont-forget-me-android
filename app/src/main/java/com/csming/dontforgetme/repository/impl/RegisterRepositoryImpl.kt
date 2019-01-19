@@ -1,7 +1,7 @@
-package com.csming.dontforgetme.login.repository.impl
+package com.csming.dontforgetme.repository.impl
 
 import com.csming.dontforgetme.api.AccountApi
-import com.csming.dontforgetme.login.repository.RegisterRepository
+import com.csming.dontforgetme.repository.RegisterRepository
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

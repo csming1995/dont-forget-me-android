@@ -1,4 +1,4 @@
-package com.csming.dontforgetme.main.repository
+package com.csming.dontforgetme.repository
 
 import com.csming.dontforgetme.common.model.BookModel
 import com.csming.dontforgetme.common.model.RecordingModel

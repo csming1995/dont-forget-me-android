@@ -29,21 +29,20 @@ import dagger.android.support.DaggerFragment;
 /**
  * @author Created by csming on 2018/11/21.
  */
-public class MainTimelineFragment extends DaggerFragment {
+public class DailyFragment extends DaggerFragment {
 
     private SwipeRefreshLayout mSrlDailies;
     private RecyclerView.LayoutManager mLayoutManagerDailies;
     private RecyclerView mRvDailies;
     private DailiesListAdapter mDailiesListAdapter;
 
-
     @Inject
     ViewModelProvider.Factory factory;
 
     private MainViewModel mainViewModel;
 
-    public static MainTimelineFragment getInstance() {
-        return new MainTimelineFragment();
+    public static DailyFragment getInstance() {
+        return new DailyFragment();
     }
 
     @Override
@@ -67,7 +66,8 @@ public class MainTimelineFragment extends DaggerFragment {
     public void onResume() {
         super.onResume();
         initData();
-        mSrlDailies.setOnRefreshListener(() -> mainViewModel.getDailies());
+        freshDailies();
+        mSrlDailies.setOnRefreshListener(this::freshDailies);
     }
 
     /**
@@ -107,4 +107,9 @@ public class MainTimelineFragment extends DaggerFragment {
 //            BookModel bookModel =
         });
     }
+
+    private void freshDailies() {
+        mainViewModel.getDailies();
+    }
+
 }

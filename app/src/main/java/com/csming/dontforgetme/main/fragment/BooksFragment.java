@@ -74,9 +74,8 @@ public class BooksFragment extends DaggerFragment {
     public void onResume() {
         super.onResume();
         initData();
-        mSrlBooks.setOnRefreshListener(() -> {
-            mainViewModel.getBooks();
-        });
+        freshBooks();
+        mSrlBooks.setOnRefreshListener(this::freshBooks);
     }
 
     /**
@@ -120,5 +119,9 @@ public class BooksFragment extends DaggerFragment {
         mAdapterBooks.setOnItemClickListener((v, position) -> {
 //            BookModel bookModel =
         });
+    }
+
+    private void freshBooks() {
+        mainViewModel.getBooks();
     }
 }
