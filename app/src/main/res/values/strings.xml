@@ -22,4 +22,6 @@
     <string name="main_tag_books">记本</string>
     <string name="main_tag_timeline">日常</string>
 
+    <string name="book_day_to_start_unit">Day</string>
+
 </resources>

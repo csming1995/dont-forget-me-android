@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.model.RecordingModel;
+import com.csming.dontforgetme.common.utils.DateformatUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +63,8 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             RecordingModel recording = mRecordings.get(position);
             if (recording != null) {
                 if (recording.getAuther() != null) {
-                    ((TimelinesViewHolder) holder).setHeader(recording.getAuther().getHeader());
-                    ((TimelinesViewHolder) holder).setAuthorName(recording.getAuther().getUserName());
+                    ((TimelinesViewHolder) holder).setHeader(recording.getAuther().getAvatar());
+                    ((TimelinesViewHolder) holder).setAuthorName(recording.getAuther().getNickname());
                 }
                 if (recording.getBook() != null) {
                     ((TimelinesViewHolder) holder).setBookName(recording.getBook().getName());
@@ -73,8 +74,7 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         .into(((TimelinesViewHolder) holder).mIvImages);
                 ((TimelinesViewHolder) holder).setDescription(recording.getText());
                 ((TimelinesViewHolder) holder).setDescription(recording.getText());
-                ((TimelinesViewHolder) holder).setCreateTime(recording.getCreateTime());
-
+                ((TimelinesViewHolder) holder).setCreateTime(DateformatUtils.formatDate(recording.getCreateTime()));
             }
         }
     }

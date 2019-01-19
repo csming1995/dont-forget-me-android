@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.model.BookModel;
+import com.csming.dontforgetme.common.utils.DateformatUtils;
 import com.csming.dontforgetme.common.widget.GlideRoundTransform;
 
 import java.util.ArrayList;
@@ -90,7 +91,14 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         .apply(options)
                         .into(((BooksNormalViewHolder) holder).mIvCover);
                 ((BooksNormalViewHolder) holder).mTvTitle.setText(book.getName());
-                ((BooksNormalViewHolder) holder).mTvCreateTime.setText(book.getCreateTime());
+//                ((BooksNormalViewHolder) holder).mTvCreateTime.setText(DateformatUtils.formatDate(book.getCreateTime()));
+                ((BooksNormalViewHolder) holder).mTvDayToStartTime.setText(
+                        String.valueOf(
+                                DateformatUtils.differentDays(
+                                        book.getCreateTime()
+                                )
+                        )
+                );
                 ((BooksNormalViewHolder) holder).mTvDescription.setText(book.getDescription());
                 holder.itemView.setOnClickListener(v ->{
                     if (onItemClickListener != null) {
@@ -125,15 +133,17 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         ImageView mIvCover;
         TextView mTvTitle;
-        TextView mTvCreateTime;
+        //        TextView mTvCreateTime;
         TextView mTvDescription;
+        TextView mTvDayToStartTime;
 
         BooksNormalViewHolder(@NonNull View itemView) {
             super(itemView);
             mIvCover = itemView.findViewById(R.id.iv_book_cover);
             mTvTitle = itemView.findViewById(R.id.tv_book_title);
-            mTvCreateTime = itemView.findViewById(R.id.tv_book_createtime);
+//            mTvCreateTime = itemView.findViewById(R.id.tv_book_createtime);
             mTvDescription = itemView.findViewById(R.id.tv_book_description);
+            mTvDayToStartTime = itemView.findViewById(R.id.tv_day_to_start);
         }
     }
 
