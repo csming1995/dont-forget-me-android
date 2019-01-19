@@ -15,6 +15,7 @@ import com.csming.dontforgetme.common.model.UserModel;
 import com.csming.dontforgetme.main.fragment.BooksFragment;
 import com.csming.dontforgetme.main.fragment.DailyFragment;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
+import com.csming.dontforgetme.setting.SettingActivity;
 import com.csming.dontforgetme.timeline.activity.PostActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -191,14 +192,11 @@ public class MainActivity extends DaggerAppCompatActivity {
         mNavMenu.setNavigationItemSelectedListener(menuItem -> {
             int id = menuItem.getItemId();
 
-            if (id == R.id.nav_camera) {
+            if (id == R.id.nav_test) {
 
-            } else if (id == R.id.nav_gallery) {
-
-            } else if (id == R.id.nav_slideshow) {
-
-            } else if (id == R.id.nav_manage) {
-
+            } else if (id == R.id.nav_setting) {
+                Intent intent = SettingActivity.getIntent(this);
+                startActivity(intent);
             }
 
             mDrawer.closeDrawer(GravityCompat.START);

@@ -26,4 +26,6 @@
 
     <string name="daliy_book_name_format">[%s]</string>
 
+    <string name="setting_title">设置</string>
+
 </resources>

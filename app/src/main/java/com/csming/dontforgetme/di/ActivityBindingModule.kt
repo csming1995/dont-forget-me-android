@@ -19,12 +19,13 @@ import com.csming.dontforgetme.LaucherActivity
 import com.csming.dontforgetme.book.AddBookActivity
 import com.csming.dontforgetme.book.BookModule
 import com.csming.dontforgetme.common.di.ActivityScoped
-import com.csming.dontforgetme.login.activity.LoginActivity
 import com.csming.dontforgetme.login.LoginModule
 import com.csming.dontforgetme.login.RegisterModule
+import com.csming.dontforgetme.login.activity.LoginActivity
 import com.csming.dontforgetme.login.activity.RegisterActivity
 import com.csming.dontforgetme.main.MainActivity
 import com.csming.dontforgetme.main.MainModule
+import com.csming.dontforgetme.setting.SettingActivity
 import com.csming.dontforgetme.timeline.TimelineModule
 import com.csming.dontforgetme.timeline.activity.PostActivity
 import dagger.Module
@@ -56,4 +57,8 @@ abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = [TimelineModule::class])
     internal abstract fun postActivity(): PostActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector()
+    internal abstract fun settingActivity(): SettingActivity
 }

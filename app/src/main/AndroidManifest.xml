@@ -36,6 +36,10 @@
             android:name=".timeline.activity.PostActivity"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="adjustResize"></activity>
+
+        <activity
+            android:name=".setting.SettingActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
     </application>
 
 </manifest>
