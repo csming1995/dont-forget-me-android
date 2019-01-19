@@ -86,10 +86,12 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         .error(R.mipmap.ic_launcher_foreground)
                         .transform(new GlideRoundTransform(((BooksNormalViewHolder) holder).mIvCover.getContext()));
                 Glide.with(((BooksNormalViewHolder) holder).mIvCover.getContext())
-                        .load(BASE_URL + book.getFrontCover())
+                        .load(BASE_URL + book.getCover())
                         .apply(options)
                         .into(((BooksNormalViewHolder) holder).mIvCover);
-                ((BooksNormalViewHolder) holder).mTvTitle.setText(book.getBookName());
+                ((BooksNormalViewHolder) holder).mTvTitle.setText(book.getName());
+                ((BooksNormalViewHolder) holder).mTvCreateTime.setText(book.getCreateTime());
+                ((BooksNormalViewHolder) holder).mTvDescription.setText(book.getDescription());
                 holder.itemView.setOnClickListener(v ->{
                     if (onItemClickListener != null) {
                         onItemClickListener.onClick(v, position);
@@ -119,15 +121,19 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    static class BooksNormalViewHolder extends RecyclerView.ViewHolder {
+    private static class BooksNormalViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mIvCover;
         TextView mTvTitle;
+        TextView mTvCreateTime;
+        TextView mTvDescription;
 
         BooksNormalViewHolder(@NonNull View itemView) {
             super(itemView);
             mIvCover = itemView.findViewById(R.id.iv_book_cover);
             mTvTitle = itemView.findViewById(R.id.tv_book_title);
+            mTvCreateTime = itemView.findViewById(R.id.tv_book_createtime);
+            mTvDescription = itemView.findViewById(R.id.tv_book_description);
         }
     }
 

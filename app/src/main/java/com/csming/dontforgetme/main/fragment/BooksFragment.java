@@ -2,7 +2,6 @@ package com.csming.dontforgetme.main.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.book.AddBookActivity;
 import com.csming.dontforgetme.common.model.BookModel;
 import com.csming.dontforgetme.common.model.NetModelKt;
-import com.csming.dontforgetme.common.widget.AutofitRecyclerView;
 import com.csming.dontforgetme.main.adapter.BooksListAdapter;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
 
@@ -27,6 +25,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.android.support.DaggerFragment;
 
@@ -37,7 +37,8 @@ public class BooksFragment extends DaggerFragment {
 
     private SwipeRefreshLayout mSrlBooks;
 
-    private AutofitRecyclerView mRvBooks;
+    private RecyclerView mRvBooks;
+    private RecyclerView.LayoutManager mLayoutManagerBooks;
     private BooksListAdapter mAdapterBooks;
 
     @Inject
@@ -111,9 +112,11 @@ public class BooksFragment extends DaggerFragment {
     private void initView(View view) {
         mSrlBooks = view.findViewById(R.id.srl_books);
         mRvBooks = view.findViewById(R.id.rv_books);
+
+        mLayoutManagerBooks = new LinearLayoutManager(getActivity());
+        mRvBooks.setLayoutManager(mLayoutManagerBooks);
         mAdapterBooks = new BooksListAdapter();
         mRvBooks.setAdapter(mAdapterBooks);
-        mRvBooks.setColumnWidth((int) (Resources.getSystem().getDisplayMetrics().density * 100));
 
         mAdapterBooks.setOnAddClickListener(v -> {
             Intent intent = new Intent(getActivity(), AddBookActivity.class);

@@ -66,7 +66,7 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     ((TimelinesViewHolder) holder).setAuthorName(recording.getAuther().getUserName());
                 }
                 if (recording.getBook() != null) {
-                    ((TimelinesViewHolder) holder).setBookName(recording.getBook().getBookName());
+                    ((TimelinesViewHolder) holder).setBookName(recording.getBook().getName());
                 }
                 ((TimelinesViewHolder) holder).setDescription(recording.getDescription());
                 ((TimelinesViewHolder) holder).setCreateTime(recording.getCreateTime());

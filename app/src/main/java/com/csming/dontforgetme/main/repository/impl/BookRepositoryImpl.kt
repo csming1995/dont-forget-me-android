@@ -37,9 +37,10 @@ class BookRepositoryImpl @Inject constructor(
                         "",
                         ""
                 ),
-                bookName = "喵子",
-                frontCover = "",
-                description = ""
+                name = "喵子",
+                cover = "",
+                description = "云吸猫日记吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸",
+                createTime = "2019-01-17 5:31"
         ))
         observer.onNext(list)
     }

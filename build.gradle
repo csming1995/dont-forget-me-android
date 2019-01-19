@@ -50,6 +50,7 @@ ext {
 
     gsonVersion = "2.8.5"
 
+    rxjavaVersion = "2.0.1"
 }
 
 task clean(type: Delete) {

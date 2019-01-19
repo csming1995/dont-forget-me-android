@@ -1,28 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="120dp"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
     android:layout_margin="8dp">
 
-    <ImageView
-        android:id="@+id/iv_book_cover"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center|top"
-        android:src="@mipmap/ic_launcher"
-        android:translationZ="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_book_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/color_black"
-        android:layout_marginTop="16dp"
-        android:textSize="14dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
+        android:orientation="horizontal"
+        android:layout_gravity="center|start"
+        android:layout_marginStart="20dp">
 
-</LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_book_cover"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="start|center"
+            android:src="@drawable/default_icon"
+            app:civ_border_width="4dp"
+            app:civ_border_color="@color/color_9e9e9e" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="start|bottom">
+
+                <TextView
+                    android:id="@+id/tv_book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_212121"
+                    android:textSize="20dp"
+                    android:text="Test"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_book_createtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_424242"
+                    android:layout_marginStart="10dp"
+                    android:textSize="14dp"
+                    android:text="Test" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_book_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_424242"
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="20dp"
+                android:textSize="14dp"
+                android:text="云吸猫日记"
+                android:ellipsize="end"
+                android:singleLine="true" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
