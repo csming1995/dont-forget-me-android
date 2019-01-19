@@ -1,6 +1,5 @@
 package com.csming.dontforgetme.main.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.android.support.DaggerFragment;
 
 /**
@@ -30,7 +31,8 @@ import dagger.android.support.DaggerFragment;
  */
 public class MainTimelineFragment extends DaggerFragment {
 
-
+    private SwipeRefreshLayout mSrlDailies;
+    private RecyclerView.LayoutManager mLayoutManagerDailies;
     private RecyclerView mRvDailies;
     private DailiesListAdapter mDailiesListAdapter;
 
@@ -62,9 +64,10 @@ public class MainTimelineFragment extends DaggerFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onResume() {
+        super.onResume();
         initData();
+        mSrlDailies.setOnRefreshListener(() -> mainViewModel.getDailies());
     }
 
     /**
@@ -75,6 +78,9 @@ public class MainTimelineFragment extends DaggerFragment {
         mainViewModel.setToken(ApplicationConfig.getToken(getActivity()));
 
         mainViewModel.getDailyLiveData().observe(getActivity(), netModel -> {
+            if (mSrlDailies != null) {
+                mSrlDailies.setRefreshing(false);
+            }
             if (netModel != null) {
                 if (netModel.getStatus() == NetModelKt.NET_ERROR) {
                     Toast.makeText(getActivity(), "网络异常, 请检查网络状态", Toast.LENGTH_SHORT).show();
@@ -89,7 +95,11 @@ public class MainTimelineFragment extends DaggerFragment {
     }
 
     private void initView(View view) {
+
+        mSrlDailies = view.findViewById(R.id.srl_books);
         mRvDailies = view.findViewById(R.id.rv_books);
+        mLayoutManagerDailies = new LinearLayoutManager(getActivity());
+        mRvDailies.setLayoutManager(mLayoutManagerDailies);
         mDailiesListAdapter = new DailiesListAdapter();
         mRvDailies.setAdapter(mDailiesListAdapter);
 

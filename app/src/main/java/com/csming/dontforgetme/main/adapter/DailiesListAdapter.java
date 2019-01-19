@@ -68,7 +68,11 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 if (recording.getBook() != null) {
                     ((TimelinesViewHolder) holder).setBookName(recording.getBook().getName());
                 }
-                ((TimelinesViewHolder) holder).setDescription(recording.getDescription());
+                Glide.with(((TimelinesViewHolder) holder).mIvImages.getContext())
+                        .load(position % 2 == 1 ? R.drawable.cat_test : R.drawable.cat_test2)
+                        .into(((TimelinesViewHolder) holder).mIvImages);
+                ((TimelinesViewHolder) holder).setDescription(recording.getText());
+                ((TimelinesViewHolder) holder).setDescription(recording.getText());
                 ((TimelinesViewHolder) holder).setCreateTime(recording.getCreateTime());
 
             }
@@ -85,7 +89,8 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private ImageView mIvHeader;
         private TextView mTvAuthorName;
         private TextView mTvBookName;
-        private TextView mTvDescription;
+        private TextView mTvText;
+        private ImageView mIvImages;
         private TextView mTvCreateTime;
 
         TimelinesViewHolder(@NonNull View itemView) {
@@ -93,7 +98,8 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mIvHeader = itemView.findViewById(R.id.iv_header);
             mTvAuthorName = itemView.findViewById(R.id.tv_author_name);
             mTvBookName = itemView.findViewById(R.id.tv_book_title);
-            mTvDescription = itemView.findViewById(R.id.tv_description);
+            mTvText = itemView.findViewById(R.id.tv_text);
+            mIvImages = itemView.findViewById(R.id.iv_images);
             mTvCreateTime = itemView.findViewById(R.id.tv_create_time);
         }
 
@@ -117,7 +123,7 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         void setDescription(String description) {
             if (!TextUtils.isEmpty(description)) {
-                mTvDescription.setText(description);
+                mTvText.setText(description);
             }
         }
 

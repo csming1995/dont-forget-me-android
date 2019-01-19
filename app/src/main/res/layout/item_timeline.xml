@@ -10,19 +10,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="56dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_header"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="16dp"
                 android:layout_gravity="center|start"
-                android:background="@mipmap/ic_launcher_round" />
+                android:src="@drawable/default_icon"
+                app:civ_border_width="0dp" />
 
             <TextView
                 android:id="@+id/tv_author_name"
@@ -32,7 +34,7 @@
                 android:textColor="@color/color_black"
                 android:textSize="14dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="66dp" />
+                android:layout_marginStart="60dp" />
 
             <TextView
                 android:id="@+id/tv_book_title"
@@ -42,7 +44,7 @@
                 android:textSize="14dp"
                 android:textColor="@color/color_757575"
                 android:layout_marginTop="28dp"
-                android:layout_marginStart="66dp" />
+                android:layout_marginStart="60dp" />
 
             <TextView
                 android:id="@+id/tv_create_time"
@@ -57,18 +59,26 @@
 
         </FrameLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 改成九宫格图片的控件 根据图片数量修改布局 -->
+            <ImageView
+                android:id="@+id/iv_images"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="8dp" />
 
             <TextView
-                android:id="@+id/tv_description"
+                android:id="@+id/tv_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
                 android:text="Xxxx"
                 android:textSize="16dp"
+                android:layout_gravity="center"
                 android:textColor="@color/color_black" />
 
             <LinearLayout
@@ -95,7 +105,7 @@
                 <!--android:layout_gravity="center" />-->
             </LinearLayout>
 
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

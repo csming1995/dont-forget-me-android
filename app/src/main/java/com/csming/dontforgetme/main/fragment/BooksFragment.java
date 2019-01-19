@@ -1,6 +1,5 @@
 package com.csming.dontforgetme.main.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -74,15 +73,10 @@ public class BooksFragment extends DaggerFragment {
     @Override
     public void onResume() {
         super.onResume();
+        initData();
         mSrlBooks.setOnRefreshListener(() -> {
             mainViewModel.getBooks();
         });
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        initData();
     }
 
     /**

@@ -7,8 +7,6 @@ import com.csming.dontforgetme.common.model.RecordingModel
 import com.csming.dontforgetme.common.model.UserModel
 import com.csming.dontforgetme.main.repository.BookRepository
 import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -46,11 +44,55 @@ class BookRepositoryImpl @Inject constructor(
     }
 
     override fun getDailies(token: String, observer: Observer<List<RecordingModel>?>) {
-        dailyApi.getDailies(token)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer)
+//        dailyApi.getDailies(token)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer)
+
+        val list = ArrayList<RecordingModel>(1)
+        list.add(RecordingModel(
+                auther = UserModel(
+                        "",
+                        "少棉",
+                        "",
+                        "",
+                        "",
+                        ""
+                ),
+                book = BookModel(
+                        owner = null,
+                        name = "喵子",
+                        cover = "",
+                        description = "云吸猫日记吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸",
+                        createTime = "2019-01-17 5:31"
+                ),
+                text = "吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸 ",
+                images = null,
+                createTime = "2019-01-17 5:31"
+        ))
+
+        list.add(RecordingModel(
+                auther = UserModel(
+                        "",
+                        "少棉",
+                        "",
+                        "",
+                        "",
+                        ""
+                ),
+                book = BookModel(
+                        owner = null,
+                        name = "喵子",
+                        cover = "",
+                        description = "云吸猫日记吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸",
+                        createTime = "2019-01-17 5:31"
+                ),
+                text = "狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸",
+                images = null,
+                createTime = "2019-01-17 5:31"
+        ))
+        observer.onNext(list)
     }
 
 }
