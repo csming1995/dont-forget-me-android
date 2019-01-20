@@ -53,7 +53,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_camera_alt_black_24dp" />
+                app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
         </FrameLayout>
 
         <EditText
@@ -120,6 +120,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin"
-        android:src="@drawable/ic_check_white_24dp" />
+        app:srcCompat="@drawable/ic_check_white_24dp" />
 
 </LinearLayout>

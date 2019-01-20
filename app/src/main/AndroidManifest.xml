@@ -40,6 +40,10 @@
         <activity
             android:name=".setting.SettingActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
+
+        <activity
+            android:name=".daily.DailyDetailActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public interface OnItemClickListener {
-        void onClick(View view, int position);
+        void onClick(View view, RecordingModel recordingModel, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -74,6 +74,12 @@ public class DailiesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         .into(((TimelinesViewHolder) holder).mIvImages);
                 ((TimelinesViewHolder) holder).setDescription(recording.getText());
                 ((TimelinesViewHolder) holder).setCreateTime(DateformatUtils.formatDate(recording.getCreateTime()));
+
+                holder.itemView.setOnClickListener(v -> {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onClick(v, recording, position);
+                    }
+                });
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.csming.dontforgetme.main.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
 import com.csming.dontforgetme.common.model.NetModelKt;
 import com.csming.dontforgetme.common.model.RecordingModel;
+import com.csming.dontforgetme.daily.DailyDetailActivity;
 import com.csming.dontforgetme.main.adapter.DailiesListAdapter;
 import com.csming.dontforgetme.main.viewmodel.MainViewModel;
 
@@ -103,8 +105,9 @@ public class DailyFragment extends DaggerFragment {
         mDailiesListAdapter = new DailiesListAdapter();
         mRvDailies.setAdapter(mDailiesListAdapter);
 
-        mDailiesListAdapter.setOnItemClickListener((v, position) -> {
-//            BookModel bookModel =
+        mDailiesListAdapter.setOnItemClickListener((v, recordingModel, position) -> {
+            Intent intent = DailyDetailActivity.getIntent(getContext());
+            startActivity(intent);
         });
     }
 
