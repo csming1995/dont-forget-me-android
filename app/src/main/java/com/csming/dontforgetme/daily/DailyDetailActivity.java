@@ -3,9 +3,13 @@ package com.csming.dontforgetme.daily;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.csming.dontforgetme.R;
+import com.csming.dontforgetme.common.widget.collapsing.CollapsingToolbarLayoutState;
 import com.csming.dontforgetme.daily.viewmodel.DailyDetailViewModel;
+import com.google.android.material.appbar.AppBarLayout;
 
 import javax.inject.Inject;
 
@@ -17,7 +21,10 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 public class DailyDetailActivity extends DaggerAppCompatActivity {
 
+    private AppBarLayout appBarLayout;
     private Toolbar toolbar;
+    private LinearLayout mLlToolbarTitle;
+    private CollapsingToolbarLayoutState state;
 
 //    // Header Glide Options
 //    private RequestOptions mOptionsHeader = new RequestOptions()
@@ -51,6 +58,9 @@ public class DailyDetailActivity extends DaggerAppCompatActivity {
      * 初始化ToolBar
      */
     private void initToolBar() {
+
+        appBarLayout = findViewById(R.id.app_bar_layout);
+        mLlToolbarTitle = findViewById(R.id.ll_toolbar_title);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -58,8 +68,29 @@ public class DailyDetailActivity extends DaggerAppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(R.string.daily_detail_title);
+            actionBar.setTitle(null);
         }
+
+        // 处理CollapsingToolbarLayout的展开与关闭的动作
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                    state = CollapsingToolbarLayoutState.EXPANDED;//修改状态标记为展开
+                    mLlToolbarTitle.setVisibility(View.GONE);//设置title为EXPANDED
+                }
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                if (state != CollapsingToolbarLayoutState.COLLAPSED) {
+                    mLlToolbarTitle.setVisibility(View.VISIBLE);//设置title不显示
+                    state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
+                }
+            } else {
+                if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
+                    mLlToolbarTitle.setVisibility(View.GONE);//设置title为INTERNEDIATE
+                    state = CollapsingToolbarLayoutState.INTERNEDIATE;//修改状态标记为中间
+                }
+            }
+        });
+
     }
 
     /**
