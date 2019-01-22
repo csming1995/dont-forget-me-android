@@ -3,6 +3,9 @@ package com.csming.dontforgetme.daily;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -17,6 +20,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class DailyDetailActivity extends DaggerAppCompatActivity {
@@ -24,6 +28,9 @@ public class DailyDetailActivity extends DaggerAppCompatActivity {
     private AppBarLayout appBarLayout;
     private Toolbar toolbar;
     private LinearLayout mLlToolbarTitle;
+
+    private SwipeRefreshLayout mSrlContent;
+
     private CollapsingToolbarLayoutState state;
 
 //    // Header Glide Options
@@ -47,11 +54,34 @@ public class DailyDetailActivity extends DaggerAppCompatActivity {
 
         initToolBar();
         initViewModel();
+
+        initView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_daily_details, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_share) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
@@ -91,6 +121,19 @@ public class DailyDetailActivity extends DaggerAppCompatActivity {
             }
         });
 
+    }
+
+    private void initView() {
+        mSrlContent = findViewById(R.id.srl_content);
+        
+        mSrlContent.setOnRefreshListener(() -> {
+
+            // FIXME delete me
+            final Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                mSrlContent.setRefreshing(false);
+            }, 2000);
+        });
     }
 
     /**
