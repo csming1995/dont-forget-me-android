@@ -29,7 +29,7 @@
             android:name=".main.MainActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
         <activity
-            android:name=".book.AddBookActivity"
+            android:name=".book.activity.AddBookActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
 
         <activity
@@ -43,6 +43,10 @@
 
         <activity
             android:name=".daily.DailyDetailActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
+
+        <activity
+            android:name=".book.activity.BookDetailActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
     </application>
 

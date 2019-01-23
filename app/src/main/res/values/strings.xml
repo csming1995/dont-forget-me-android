@@ -30,5 +30,6 @@
 
     <string name="daily_detail_title">详情</string>
 
-    <string name="share_tip">分享</string>
+    <string name="menu_share_tip">分享</string>
+    <string name="menu_setting_tip">设置</string>
 </resources>

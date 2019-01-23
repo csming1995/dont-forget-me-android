@@ -40,7 +40,7 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public interface OnItemClickListener {
-        void onClick(View view, int position);
+        void onClick(View view, BookModel bookModel, int position);
     }
 
     public interface OnAddClickListener {
@@ -102,7 +102,7 @@ public class BooksListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 ((BooksNormalViewHolder) holder).mTvDescription.setText(book.getDescription());
                 holder.itemView.setOnClickListener(v ->{
                     if (onItemClickListener != null) {
-                        onItemClickListener.onClick(v, position);
+                        onItemClickListener.onClick(v, book, position);
                     }
                 });
             }

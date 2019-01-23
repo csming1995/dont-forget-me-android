@@ -12,4 +12,6 @@ interface BookRepository {
     fun getBooks(token: String, observer: Observer<List<BookModel>?>)
 
     fun getDailies(token: String, observer: Observer<List<RecordingModel>?>)
+
+    fun getDailies(token: String, bookName: String, observer: Observer<List<RecordingModel>?>)
 }

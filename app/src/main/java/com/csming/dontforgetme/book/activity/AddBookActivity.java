@@ -1,4 +1,4 @@
-package com.csming.dontforgetme.book;
+package com.csming.dontforgetme.book.activity;
 
 import android.os.Bundle;
 

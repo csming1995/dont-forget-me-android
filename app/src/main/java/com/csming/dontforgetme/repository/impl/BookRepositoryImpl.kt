@@ -102,4 +102,52 @@ class BookRepositoryImpl @Inject constructor(
         observer.onNext(list)
     }
 
+    override fun getDailies(token: String, bookName: String, observer: Observer<List<RecordingModel>?>) {
+        //        dailyApi.getDailies(token)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer)
+
+        val list = ArrayList<RecordingModel>(2)
+        list.add(RecordingModel(
+                auther = UserModel(
+                        "",
+                        "少棉",
+                        "",
+                        ""
+                ),
+                book = BookModel(
+                        owner = null,
+                        name = "喵子",
+                        cover = "",
+                        description = "云吸猫日记吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸",
+                        createTime = Date(1547727788791)
+                ),
+                text = "吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸 ",
+                images = null,
+                createTime = Date(1547727788791)
+        ))
+
+        list.add(RecordingModel(
+                auther = UserModel(
+                        "",
+                        "少棉",
+                        "",
+                        ""
+                ),
+                book = BookModel(
+                        owner = null,
+                        name = "喵子",
+                        cover = "",
+                        description = "云吸猫日记吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸",
+                        createTime = Date(1547727788791)
+                ),
+                text = "狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸狂吸",
+                images = null,
+                createTime = Date(1547727788791)
+        ))
+        observer.onNext(list)
+    }
+
 }

@@ -9,7 +9,8 @@ import android.widget.Toast;
 
 import com.csming.dontforgetme.ApplicationConfig;
 import com.csming.dontforgetme.R;
-import com.csming.dontforgetme.book.AddBookActivity;
+import com.csming.dontforgetme.book.activity.AddBookActivity;
+import com.csming.dontforgetme.book.activity.BookDetailActivity;
 import com.csming.dontforgetme.common.model.BookModel;
 import com.csming.dontforgetme.common.model.NetModelKt;
 import com.csming.dontforgetme.main.adapter.BooksListAdapter;
@@ -116,8 +117,9 @@ public class BooksFragment extends DaggerFragment {
             startActivity(intent);
         });
 
-        mAdapterBooks.setOnItemClickListener((v, position) -> {
-//            BookModel bookModel =
+        mAdapterBooks.setOnItemClickListener((v, bookModel, position) -> {
+            Intent intent = BookDetailActivity.getIntent(getContext());
+            startActivity(intent);
         });
     }
 
