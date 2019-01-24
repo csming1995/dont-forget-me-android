@@ -1,16 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginTop="20dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_header"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center|start"
+            android:src="@drawable/default_icon"
+            app:civ_border_width="0dp" />
+
+        <TextView
+            android:id="@+id/tv_author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="少棉"
+            android:textColor="@color/color_black"
+            android:textSize="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="64dp" />
+
+        <TextView
+            android:id="@+id/tv_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="这个人是Master"
+            android:textSize="14dp"
+            android:textColor="@color/color_757575"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="64dp" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_e0e0e0" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="云吸猫日记吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸吸"
         android:textSize="14dp" />
 
-</FrameLayout>
+</LinearLayout>
